@@ -143,6 +143,27 @@ app.get("/test-email", async (req, res) => {
     res.status(500).send(err.message);
   }
 });
+const net = require("net");
+
+app.get("/test-smtp-port", (req, res) => {
+  const socket = net.createConnection(587, "smtp.gmail.com");
+
+  socket.setTimeout(10000);
+
+  socket.on("connect", () => {
+    socket.destroy();
+    res.send("TCP connection successful");
+  });
+
+  socket.on("timeout", () => {
+    socket.destroy();
+    res.status(500).send("TCP timeout");
+  });
+
+  socket.on("error", (err) => {
+    res.status(500).send(err.code || err.message);
+  });
+});
 app.get("/", (req, res) => res.send("Lead Management API running"));
 
 app.listen(PORT, () => console.log(`🚀 Server on http://localhost:${PORT}`));
