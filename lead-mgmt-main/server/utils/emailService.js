@@ -52,4 +52,4 @@ async function sendLeadEmail(lead) {
   return info;
 }
 
-module.exports = { sendLeadEmail, REAL_LINK,buildTransporter };
+module.exports = { sendLeadEmail, REAL_LINK,buildTransporter};

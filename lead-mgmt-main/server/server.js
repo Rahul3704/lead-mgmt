@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const Lead = require("./models/Lead");
 const { classifyLead } = require("./utils/aiClassifier");
-const { sendLeadEmail, REAL_LINK } = require("./utils/emailService");
+const { sendLeadEmail, REAL_LINK,buildTransporter } = require("./utils/emailService");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
