@@ -8,11 +8,19 @@ function buildTransporter() {
     const port = Number(process.env.SMTP_PORT) || 587;
 
     return nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port,
-      secure: port === 465,
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    });
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port,
+  secure: port === 465,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+  logger: true,
+  debug: true,
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
+});
   }
 
   throw new Error("SMTP_USER and SMTP_PASS are required to send email.");
